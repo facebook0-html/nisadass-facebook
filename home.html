@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nisadas Arana</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+        
+        .header {
+            background-color: #1877f2;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .search-bar {
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            max-width: 500px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: none;
+        }
+        
+        .main-content {
+            display: flex;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .left-sidebar {
+            width: 25%;
+            padding-right: 20px;
+        }
+        
+        .news-feed {
+            width: 50%;
+        }
+        
+        .right-sidebar {
+            width: 25%;
+            padding-left: 20px;
+        }
+        
+        .post {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .post-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .post-content {
+            margin-bottom: 10px;
+        }
+        
+        .post-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .post-actions {
+            display: flex;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+        
+        .post-action {
+            flex: 1;
+            text-align: center;
+            padding: 5px;
+            cursor: pointer;
+        }
+        
+        .credentials-display {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .left-sidebar, .news-feed, .right-sidebar {
+                width: 100%;
+                padding: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Nisadas Arana</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search Nisadas Arana">
+        </div>
+        <div class="menu">Menu</div>
+    </div>
+    
+    <div class="main-content">
+        <div class="left-sidebar">
+            <div class="post">
+                <h3>නිසදස් අරණ</h3>
+                <div class="credentials-display">
+                    <p>ඔබගේ ලොගින් තොරතුරු:</p>
+                    <p id="display-username">පරිශීලක නාමය: </p>
+                    <p id="display-password">මුරපදය: </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="news-feed">
+            <div class="post">
+                <div class="post-header">
+                    <img src="images/nisadas1.jpg" alt="Nisadas 1">
+                    <div>
+                        <div class="post-author">නිසදස් අරණ</div>
+                        <div class="post-time">Just now</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>නිසදස් අරණ පිටුවට සාදරයෙන් පිළිගනිමු! මෙය ඔබගේ පළමු පළ කිරීමයි.</p>
+                </div>
+                <img class="post-image" src="images/P06.jpg" alt="P06 Image">
+                <div class="post-actions">
+                    <div class="post-action">Like</div>
+                    <div class="post-action">Comment</div>
+                    <div class="post-action">Share</div>
+                </div>
+            </div>
+            
+            <!-- Generated posts -->
+            <div id="generated-posts"></div>
+        </div>
+        
+        <div class="right-sidebar">
+            <div class="post">
+                <h3>නිසදස් ගැන</h3>
+                <p>මෙය නිසදස් අරණ පිටුවයි. ඔබගේ සහයෝගයට ස්තූතියි!</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Display stored credentials
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = localStorage.getItem('demo_username');
+            const password = localStorage.getItem('demo_password');
+            
+            document.getElementById('display-username').textContent += username;
+            document.getElementById('display-password').textContent += password;
+            
+            // Generate sample posts
+            const postsContainer = document.getElementById('generated-posts');
+            for (let i = 1; i <= 5; i++) {
+                const postHTML = `
+                <div class="post">
+                    <div class="post-header">
+                        <img src="images/nisadas${i}.jpg" alt="Nisadas ${i}">
+                        <div>
+                            <div class="post-author">නිසදස් අරණ</div>
+                            <div class="post-time">${i} hour${i > 1 ? 's' : ''} ago</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>නිසදස් අරණ පළ කිරීම #${i}</p>
+                    </div>
+                    <img class="post-image" src="images/P06.jpg" alt="P06 Image">
+                    <div class="post-actions">
+                        <div class="post-action">Like</div>
+                        <div class="post-action">Comment</div>
+                        <div class="post-action">Share</div>
+                    </div>
+                </div>
+                `;
+                postsContainer.innerHTML += postHTML;
+            }
+        });
+    </script>
+</body>
+</html>
